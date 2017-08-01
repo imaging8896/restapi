@@ -3,7 +3,7 @@ import requests
 
 def get(api_path, headers):
     try:
-        resp = requests.get(api_path, headers=headers)
+        resp = requests.get(api_path, headers=headers).json()
     except requests.ConnectionError, e:
         print e  # should I also sys.exit(1) after this?
         resp = None
@@ -12,7 +12,7 @@ def get(api_path, headers):
 
 def post(api_path, data, headers):
     try:
-        resp = requests.post(api_path, data=data, headers=headers)
+        resp = requests.post(api_path, data=data, headers=headers).json()
     except requests.ConnectionError, e:
         print e  # should I also sys.exit(1) after this?
         resp = None
@@ -21,7 +21,7 @@ def post(api_path, data, headers):
 
 def delete(api_path, headers):
     try:
-        resp = requests.delete(api_path, headers=headers)
+        resp = requests.delete(api_path, headers=headers).json()
     except requests.ConnectionError, e:
         print e  # should I also sys.exit(1) after this?
         resp = None
