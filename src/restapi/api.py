@@ -13,14 +13,12 @@ def API(func):
         print "API '" + func.__name__ + "' was called"
         print "API info {}".format(str(api_info))
         if api_method == "Get":
-            print api_method
             return method.get(url, headers)
         elif api_method == "Post":
-            data = api_info['data']
-            print api_method
-            return method.post(url, data, headers)
+            data = api_info['data'] if 'data' in api_info else None
+            json = api_info['json'] if 'json' in api_info else None
+            return method.post(url, headers, data, json)
         elif api_method == "Delete":
-            print api_method
             return method.delete(url, headers)
         else:
             raise ValueError("Undefined API method '{}'".format(api_method))
