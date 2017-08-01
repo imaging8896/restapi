@@ -5,6 +5,6 @@ setup(
     version='0.7',
     packages=find_packages('src'),
     package_dir={'': 'src'},
-    provides=['hamcrest'],
+    provides=['restapi'],
     install_requires=['setuptools', 'requests']
 )
