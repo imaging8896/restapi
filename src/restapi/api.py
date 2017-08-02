@@ -18,6 +18,10 @@ def API(func):
             data = api_info['data'] if 'data' in api_info else None
             json = api_info['json'] if 'json' in api_info else None
             return method.post(url, headers, data, json)
+        elif api_method == "Put":
+            data = api_info['data'] if 'data' in api_info else None
+            json = api_info['json'] if 'json' in api_info else None
+            return method.put(url, headers, data, json)
         elif api_method == "Delete":
             return method.delete(url, headers)
         else:
