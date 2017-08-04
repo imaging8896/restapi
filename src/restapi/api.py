@@ -1,12 +1,19 @@
 import method
 
 
-def API(func):
+def API(func, is_status_check_for_this_api=False):
     # Decorator
     def decorated_func(*args, **kwargs):
         print "API '" + func.__name__ + "' was called"
         api_info = func(*args, **kwargs)
-        return _api_call(args[0].url, api_info)
+        apis_obj = args[0]
+        is_status_check = apis_obj.is_status_check
+        url = apis_obj.url
+        r = _api_call(url, api_info)
+        if is_status_check_for_this_api or is_status_check:
+            if r.status_code != 200:
+                raise Exception("Fail to call API the status code is not 200 but {}".format(r.status_code))
+        return r
     return decorated_func
 
 
@@ -36,8 +43,9 @@ def _api_call(url, api_info):
 
 class BaseAPIs:
 
-    def __init__(self, url):
+    def __init__(self, url, is_status_check=False):
         self.url = url
+        self.is_status_check = is_status_check
 
 #     @API
 #     def api_1(self, a):
