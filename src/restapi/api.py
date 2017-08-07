@@ -10,6 +10,7 @@ def API(func, is_status_check_for_this_api=False):
         is_status_check = apis_obj.is_status_check
         url = apis_obj.url
         r = _api_call(url, api_info)
+        print "API request object {}".format(r)
         if is_status_check_for_this_api or is_status_check:
             if r.status_code != 200:
                 raise Exception("Fail to call API the status code is not 200 but {}".format(r.status_code))
