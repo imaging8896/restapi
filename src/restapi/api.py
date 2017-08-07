@@ -48,6 +48,12 @@ class BaseAPIs:
         self.url = url
         self.is_status_check = is_status_check
 
+    def api_call(self, method, url):
+        return {
+            "method": "Get",
+
+        }
+
 #     @API
 #     def api_1(self, a):
 #         return {'path': '/v1/banners/ja_android_tabs_unlimited/banner',
@@ -56,4 +62,20 @@ class BaseAPIs:
 #                 'data': a}
 #
 #
+
+
+class RawAPIs:
+
+    def __init__(self, headers, is_status_check=False):
+        self.url = ""
+        self.headers = headers
+        self.is_status_check = is_status_check
+
+    @API
+    def api_call(self, api_method, url):
+        return {
+            "method": api_method,
+            "path": url,
+            "headers": self.headers
+        }
 
