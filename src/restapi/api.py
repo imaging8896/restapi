@@ -64,7 +64,7 @@ class BaseAPIs:
 #
 
 
-class RawAPIs:
+class DirectAPIs:
 
     def __init__(self, headers, is_status_check=False):
         self.url = ""
