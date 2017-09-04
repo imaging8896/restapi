@@ -1,8 +1,20 @@
 import method
 import urllib
+import logging
+try:
+    from http.client import HTTPConnection # py3
+except ImportError:
+    from httplib import HTTPConnection # py2
 
 
-def API(func, is_status_check_for_this_api=False):
+def API(func):
+    HTTPConnection.debuglevel = 2
+    logging.basicConfig()
+    logging.getLogger().setLevel(logging.WARNING)
+    requests_log = logging.getLogger("requests.packages.urllib3")
+    requests_log.setLevel(logging.WARNING)
+    requests_log.propagate = True
+
     # Decorator
     def decorated_func(*args, **kwargs):
         print "API '" + func.__name__ + "' was called"
@@ -12,7 +24,9 @@ def API(func, is_status_check_for_this_api=False):
         url = apis_obj.url
         r = _api_call(url, api_info)
         print "API request object {}".format(r)
-        if is_status_check_for_this_api or is_status_check:
+        if "json" in dir(r):
+            print "API request json => {}".format(r.json())
+        if is_status_check:
             if r.status_code != 200:
                 raise Exception("Fail to call API the status code is not 200 but {}".format(r.status_code))
         return r
