@@ -1,5 +1,6 @@
 A beautiful Rest API list to be called
 =======================
+Can be use as part of RESTful API test framework
 
 Install
 =======================
