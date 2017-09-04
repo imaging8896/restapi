@@ -36,15 +36,16 @@ def API(func):
 def _api_call(url, api_info):
     if not isinstance(api_info, dict):
         raise TypeError('API infomation should be dictionary type')
-
+    url = url + api_info['path']
     headers = api_info['headers']
-    query_strings = api_info['query_strings']
+    query_strings = api_info['query_strings'] if 'query_strings' in api_info else None
     api_method = api_info['method']
 
-    if not isinstance(query_strings, dict):
-        raise ValueError("'query_strings' should be type of dictionary")
-    query_string_encoded = urllib.urlencode(query_strings)
-    url = url + api_info['path'] + "?" + query_string_encoded
+    if query_strings:
+        if not isinstance(query_strings, dict):
+            raise ValueError("'query_strings' should be type of dictionary")
+        else:
+            url += "?" + urllib.urlencode(query_strings)
 
     print "API info {}".format(str(api_info))
     if api_method == "Get":

@@ -7,7 +7,9 @@ pip install git+https://github.com/imaging8896/restapi.git
 
 Usage
 =======================
-Support 'Get', 'Post', 'Put', 'Delete', and support 'data' and 'json' parameters for 'Post', 'Put'
+Support 'Get', 'Post', 'Put', 'Delete'
+Support 'data' and 'json' parameters for 'Post', 'Put' (optional)
+Support 'query_strings' (optional)
 
 .. code-block:: python
 
