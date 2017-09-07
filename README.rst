@@ -12,6 +12,8 @@ Usage
  |
  | Support 'data' and 'json' parameters for 'Post', 'Put' (optional)
  |
+ | Support 'files' parameters for 'Post' (optional)
+ |
  | Support 'query_strings' (optional)
 
 .. code-block:: python
@@ -33,10 +35,13 @@ Usage
             'query_strings': {
                 'first_str': 'val space, yee',
                 'second_str': 123
-            }
+            },
             'json': {
                 'a': 123,
                 'b': ['123', '234']
+            },
+            'files': {
+                'image': open('/Users/tedchen/Desktop/test.png', 'rb')
             }
         }
  
