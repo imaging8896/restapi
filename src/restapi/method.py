@@ -10,12 +10,15 @@ def get(api_path, headers):
     return resp
 
 
-def post(api_path, headers, data=None, json=None):
+def post(api_path, headers, data=None, json=None, files=None):
+    resp = None
     try:
-        resp = requests.post(api_path, data=data, json=json, headers=headers)
+        if files:
+            resp = requests.post(api_path, data=data, json=json, headers=headers, files=files)
+        else:
+            resp = requests.post(api_path, data=data, json=json, headers=headers)
     except requests.ConnectionError, e:
         print e  # should I also sys.exit(1) after this?
-        resp = None
     return resp
 
 

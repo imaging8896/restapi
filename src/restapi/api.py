@@ -53,7 +53,8 @@ def _api_call(url, api_info):
     elif api_method == "Post":
         data = api_info['data'] if 'data' in api_info else None
         json = api_info['json'] if 'json' in api_info else None
-        return method.post(url, headers, data, json)
+        files = api_info['files'] if 'files' in api_info else None
+        return method.post(url, headers, data, json, files)
     elif api_method == "Put":
         data = api_info['data'] if 'data' in api_info else None
         json = api_info['json'] if 'json' in api_info else None
