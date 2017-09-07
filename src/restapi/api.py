@@ -71,21 +71,6 @@ class BaseAPIs:
         self.url = url
         self.is_status_check = is_status_check
 
-    def api_call(self, method, url):
-        return {
-            "method": "Get",
-
-        }
-
-#     @API
-#     def api_1(self, a):
-#         return {'path': '/v1/banners/ja_android_tabs_unlimited/banner',
-#                 'headers': {'X-Device-ID': '263b6570-0d13-0def-37ff-'},
-#                 'method': 'Get',
-#                 'data': a}
-#
-#
-
 
 class DirectAPIs:
 
