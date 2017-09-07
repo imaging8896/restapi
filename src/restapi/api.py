@@ -1,6 +1,7 @@
 import method
 import urllib
 import logging
+import sys
 try:
     from http.client import HTTPConnection # py3
 except ImportError:
@@ -18,14 +19,18 @@ def API(func):
     # Decorator
     def decorated_func(*args, **kwargs):
         print "API '" + func.__name__ + "' was called"
+        log_file = open("restapi.log", "a+")
+        sys.stdout = log_file
         api_info = func(*args, **kwargs)
         apis_obj = args[0]
         is_status_check = apis_obj.is_status_check
         url = apis_obj.url
         r = _api_call(url, api_info)
-        print "API request object {}".format(r)
+        sys.stdout = sys.__stdout__
+        log_file.close()
+        print "API response object {}".format(r)
         if "json" in dir(r):
-            print "API request json => {}".format(r.json())
+            print "API response json => {}".format(r.json())
         if is_status_check:
             if r.status_code != 200:
                 raise Exception("Fail to call API the status code is not 200 but {}".format(r.status_code))
