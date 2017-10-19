@@ -3,34 +3,34 @@ import urllib
 import logging
 import sys
 try:
-    from http.client import HTTPConnection # py3
+    from http.client import HTTPConnection  # py3
 except ImportError:
-    from httplib import HTTPConnection # py2
+    from httplib import HTTPConnection  # py2
 
 
 def API(func):
-    HTTPConnection.debuglevel = 2
+    HTTPConnection.debuglevel = 0
     logging.basicConfig()
-    logging.getLogger().setLevel(logging.WARNING)
+    logging.getLogger().setLevel(logging.INFO)
     requests_log = logging.getLogger("requests.packages.urllib3")
-    requests_log.setLevel(logging.WARNING)
+    requests_log.setLevel(logging.INFO)
     requests_log.propagate = True
 
     # Decorator
     def decorated_func(*args, **kwargs):
-        print "API '" + func.__name__ + "' was called"
         log_file = open("restapi.log", "a+")
         sys.stdout = log_file
+        print "API '" + func.__name__ + "' was called"
         api_info = func(*args, **kwargs)
         apis_obj = args[0]
         is_status_check = apis_obj.is_status_check
         url = apis_obj.url
         r = _api_call(url, api_info)
-        sys.stdout = sys.__stdout__
-        log_file.close()
         print "API response object {}".format(r)
         if "json" in dir(r):
             print "API response json => {}".format(r.json())
+        sys.stdout = sys.__stdout__
+        log_file.close()
         if is_status_check:
             if r.status_code != 200:
                 raise Exception("Fail to call API the status code is not 200 but {}".format(r.status_code))
@@ -52,7 +52,11 @@ def _api_call(url, api_info):
         else:
             url += "?" + urllib.urlencode(query_strings)
 
-    print "API info {}".format(str(api_info))
+    p_info = dict(api_info)
+    if "files" in p_info:
+        p_info["files"] = "Truncated"
+    print "API info {}".format(str(p_info))
+
     if api_method == "Get":
         return method.get(url, headers)
     elif api_method == "Post":
