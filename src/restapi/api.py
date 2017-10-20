@@ -26,6 +26,7 @@ def API(func):
         is_status_check = apis_obj.is_status_check
         url = apis_obj.url
         r = _api_call(url, api_info)
+        print "API URL {}".format(url)
         print "API response object {}".format(r)
         if "json" in dir(r):
             print "API response json => {}".format(r.json())
