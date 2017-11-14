@@ -20,14 +20,14 @@ Usage
 
   from restapi.api import BaseAPIs, API
 
-  class Abc(BaseAPIs):
+  class Video_Model(BaseAPIs):
 
     def __init__(self):
         BaseAPIs.__init__(self, "http://XXXX")
         self.headers = {'X-Device-ID': 'YA'}
 
     @API
-    def aa(self):
+    def get_video(self):
         return {
             'path': '/v1/A/C/X',
             'headers': self.headers,
@@ -46,7 +46,7 @@ Usage
         }
  
 
-  r = Abc().aa() # Return for requests Response object
+  r = Video_Model().get_video() # Return for requests Response object
 
   if r.status_code != 200:
      raise Exception("Fail to call API")
