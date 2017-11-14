@@ -90,10 +90,17 @@ class DirectAPIs:
         self.is_status_check = is_status_check
 
     @API
-    def api_call(self, api_method, url):
-        return {
+    def api_call(self, api_method, url, data=None, json=None, files=None):
+        api_info = {
             "method": api_method,
             "path": url,
             "headers": self.headers
         }
+        if data:
+            api_info["data"] = data
+        if json:
+            api_info["json"] = json
+        if files:
+            api_info["files"] = files
+        return api_info
 
