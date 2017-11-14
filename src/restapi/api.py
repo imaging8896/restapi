@@ -28,8 +28,6 @@ def API(func):
         r = _api_call(url, api_info)
         print "API URL {}".format(url)
         print "API response object {}".format(r)
-        if "json" in dir(r):
-            print "API response json => {}".format(r.json())
         sys.stdout = sys.__stdout__
         log_file.close()
         if is_status_check:
