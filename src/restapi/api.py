@@ -71,10 +71,11 @@ def log(api_name, api_info, url, resp):
             cp_api_info["files"] = "Truncated"
 
         resp_json = None
-        try:
-            resp_json = resp.json()
-        except ValueError:
-            pass
+        if resp:
+            try:
+                resp_json = resp.json()
+            except ValueError:
+                pass
 
         resp_json_str = str(resp_json) if resp_json else ""
         resp_json_str = resp_json_str[:100] if len(resp_json_str) > 100 else resp_json_str
