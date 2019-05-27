@@ -1,4 +1,4 @@
-import method
+from restapi import method
 import urllib
 import logging
 import sys
