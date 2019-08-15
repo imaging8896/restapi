@@ -1,11 +1,15 @@
 from restapi import method
-import urllib
 import logging
 import sys
 try:
     from http.client import HTTPConnection  # py3
 except ImportError:
     from httplib import HTTPConnection  # py2
+
+try:
+    import urllib.parse as urllib  # py3
+except ImportError:
+    import urllib  # py2
 
 
 def API(func):
