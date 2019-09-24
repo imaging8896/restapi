@@ -84,7 +84,7 @@ def log(api_name, api_info, url, resp):
         resp_json_str = str(resp_json) if resp_json else ""
         resp_json_str = resp_json_str[:100] if len(resp_json_str) > 100 else resp_json_str
 
-        fin.write("API '{}' is called, domain is '{}'\n    Request body --> {}\n    Response json --> {}\n".format(api_name, url, cp_api_info, resp_json_str))
+        fin.write("API '{}' is called, domain is '{}'\n    Request body --> {}\n    Response json --> {}\n".format(api_name, url, cp_api_info, resp_json_str.encode()))
 
 
 class BaseAPIs:
